@@ -82,7 +82,7 @@ class Field(object):
     def __str__(self):
         return f'<{self.__class__.__name__}, {self.column_type}:{self.name}>'
 
-class StringFiled(Field):
+class StringField(Field):
     def __init__(self, name=None,primary_key=False,default=None,ddl='varchar(100)'):
         super().__init__(name, ddl, primary_key, default)
 
@@ -213,7 +213,7 @@ class Model(dict, metaclass=ModelMetaclass):
     
     async def save(self):
         args=list(map(self.getValueOrDefault,self.__fields__)) #获取实例对象的初始化值用做参数
-        args.append(self.getValue(self.__primary_key__))
+        args.append(self.getValueOrDefault(self.__primary_key__))
         rows=await execute(self.__insert__,args)
         if rows !=1:
             logging.warn(f'插入数据，影响行数：{rows}')
