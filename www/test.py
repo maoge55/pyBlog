@@ -1,6 +1,6 @@
 import asyncio, logging; logging.basicConfig(level=logging.INFO)
 import aiomysql,time,inspect
-from orm import __pool,select,execute,create_pool,Model,StringField,IntegerField,BooleanField
+from orm import __pool,select,execute,create_pool,Model,StringField,IntegerField,BooleanField,User
 loop= asyncio.get_event_loop()
 
 import requests,json
