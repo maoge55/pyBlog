@@ -52,7 +52,6 @@ async def auth_factory(app, handler):
     async def auth(request):
         logging.info('check user: %s %s' % (request.method, request.path))
         request.__user__ = None
-        print('ck有：',request.cookies)
         cookie_str = request.cookies.get(COOKIE_NAME)
         if cookie_str:
             user = await cookie2user(cookie_str)
