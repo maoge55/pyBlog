@@ -5,21 +5,18 @@ from model import User
 loop= asyncio.get_event_loop()
 
 import requests,json
-r = requests.get('http://localhost:9000/api/users', params={'q': 'python', 'cat': '1001'})
+#r = requests.get('http://localhost:9000/api/users', params={'q': 'python', 'cat': '1001'})
 # data={'form_email': 'abc@example.com', 'form_password': '123456'}
 # data_json = json.dumps(data)
 # r = requests.post('http://localhost:9000/maoge/abc',json=data)
-ooo=r.json()
-print(ooo)
-print(type(ooo))
+# ooo=r.json()
+# print(ooo)
+# print(type(ooo))
 
 
 async def test1():
     await create_pool(loop,user='www-data',password='www-data',db='awesome')
     #rss=await User.find(4)
-    maoge=User(email='990835192@qq.com',passwd='123456',image='about:blank',name='junzi')
-    print(time.time())
-    await maoge.save()
     rss=await User.findAll()
     print(rss)
 
@@ -29,7 +26,7 @@ async def test2():
     rs=await select(sql,(False,))
     print(rs)
 
-#loop.run_until_complete(test1())
+loop.run_until_complete(test1())
 
 
 
