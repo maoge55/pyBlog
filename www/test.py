@@ -1,14 +1,17 @@
 import asyncio, logging; logging.basicConfig(level=logging.INFO)
 import aiomysql,time,inspect
-from orm import __pool,select,execute,create_pool,Model,StringField,IntegerField,BooleanField,User
+from orm import __pool,select,execute,create_pool,Model,StringField,IntegerField,BooleanField
+from model import User
 loop= asyncio.get_event_loop()
 
 import requests,json
-#r = requests.get('http://localhost:9000', params={'q': 'python', 'cat': '1001'})
-data={'form_email': 'abc@example.com', 'form_password': '123456'}
-data_json = json.dumps(data)
-r = requests.post('http://localhost:9000/maoge/abc',json=data)
-print(r.content)
+r = requests.get('http://localhost:9000/api/users', params={'q': 'python', 'cat': '1001'})
+# data={'form_email': 'abc@example.com', 'form_password': '123456'}
+# data_json = json.dumps(data)
+# r = requests.post('http://localhost:9000/maoge/abc',json=data)
+ooo=r.json()
+print(ooo)
+print(type(ooo))
 
 
 async def test1():

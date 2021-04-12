@@ -29,11 +29,7 @@ async def index(request):
         'blogs': blogs
     }
 
-@get('/maoge')
-async def test(request):
-    users=await User.findAll()
-
-    return{
-        '__template__':'test.html',
-        'users':users
-    }
+@get('/api/users')
+async def api_get_users():
+    users = await User.findAll(orderBy='created_at desc')
+    return dict(users=users)
