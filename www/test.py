@@ -4,7 +4,7 @@ from orm import __pool,select,execute,create_pool,Model,StringField,IntegerField
 from model import User
 loop= asyncio.get_event_loop()
 
-import requests,json
+import requests,json,hashlib
 #r = requests.get('http://localhost:9000/api/users', params={'q': 'python', 'cat': '1001'})
 # data={'form_email': 'abc@example.com', 'form_password': '123456'}
 # data_json = json.dumps(data)
@@ -17,8 +17,11 @@ import requests,json
 async def test1():
     await create_pool(loop,user='www-data',password='www-data',db='awesome')
     #rss=await User.find(4)
-    rss=await User.findAll()
+    rss=(await User.findAll('name=?',['maoge']))[0]
     print(rss)
+    rss.image=f'http://www.gravatar.com/avatar/{hashlib.md5(rss.email.encode("utf-8")).hexdigest()}?d=mm&s=120'
+    print(rss)
+    await rss.update()
 
 async def test2():
     await create_pool(loop,user='root',password='123456',db='test')
