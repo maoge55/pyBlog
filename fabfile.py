@@ -43,8 +43,8 @@ def deploy():
     with cd(_REMOTE_BASE_DIR):
         sudo('rm -f www')               # 删除旧软链接
         sudo('ln -s %s www' % newdir)   # 创建新链接
-        sudo('chown root:root www') # user改为你的linux服务器上的用户名
-        sudo('chown -R root:root %s' % newdir) # 同上
+        sudo('chown www-data:www-data www') # user改为你的linux服务器上的用户名
+        sudo('chown -R www-data:www-data %s' % newdir) # 同上
     with settings(warn_only=True):
         sudo('supervisorctl stop awesome') # supervisor重启app
         sudo('supervisorctl start awesome')
